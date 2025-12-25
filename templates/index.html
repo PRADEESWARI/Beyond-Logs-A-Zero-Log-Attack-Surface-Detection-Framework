@@ -1,0 +1,54 @@
+<!-- templates/index.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>ZLASD Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="/static/css/style.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <nav class="topbar">
+    <div class="logo">ZLASD</div>
+    <div class="status" id="last-updated">Last update: --</div>
+  </nav>
+
+  <main class="container">
+    <section class="left">
+      <div class="card" id="alerts-card">
+        <h3>Real-time Alerts</h3>
+        <ul id="alerts-list"></ul>
+      </div>
+
+      <div class="card small">
+        <h3>Recent Events</h3>
+        <ul id="recent-events"></ul>
+      </div>
+    </section>
+
+    <section class="right">
+      <div class="card score-card">
+        <h3>Threat Score</h3>
+        <div id="gauge">
+          <canvas id="scoreGauge" width="200" height="150"></canvas>
+          <div id="scoreLabel">0</div>
+        </div>
+      </div>
+
+      <div class="card tiles">
+        <div class="tile" id="tile-honeypot">Honeypot: <span id="honeypot-count">0</span></div>
+        <div class="tile" id="tile-absence">Missing: <span id="absence-count">0</span></div>
+        <div class="tile" id="tile-drift">Drift: <span id="drift-count">0</span></div>
+      </div>
+
+      <div class="card">
+        <h3>Recommendations</h3>
+        <div id="recommendations">No actions.</div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/static/js/dashboard.js"></script>
+</body>
+</html>

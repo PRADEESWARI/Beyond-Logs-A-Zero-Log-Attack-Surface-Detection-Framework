@@ -1,0 +1,342 @@
+/* static/css/style.css - ENHANCED dark navy-blue SOC theme with neon/glassmorphism accents */
+/* NOTE: This file preserves all original IDs/classes used by your HTML & JS. */
+
+:root{
+  --bg-900: #071024;        /* deep navy */
+  --bg-800: #0b2238;
+  --panel: rgba(255,255,255,0.03);
+  --glass: rgba(255,255,255,0.04);
+  --soft-white: #e6eef8;
+  --muted: #9fb7d6;
+  --accent-cyan: #7dd3fc;
+  --accent-blue: #60a5fa;
+  --neon-blue: #0ea5ff;
+  --neon-green: #10b981;
+  --neon-yellow: #f59e0b;
+  --neon-red: #ef4444;
+  --glass-border: rgba(255,255,255,0.06);
+  --shadow-strong: 0 10px 30px rgba(2,6,23,0.7);
+  --shadow-soft: 0 6px 18px rgba(2,6,23,0.45);
+  --blur: 14px;
+  --radius: 12px;
+  --card-padding: 18px;
+  --gutter: 20px;
+  --mono: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Base */
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: var(--mono);
+  background: linear-gradient(180deg, var(--bg-900) 0%, #07172a 50%, #041122 100%);
+  color: var(--soft-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding-bottom: 26px;
+}
+
+/* TOPBAR - header with neon shield + title + system health */
+.topbar {
+  height: 68px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding: 0 28px;
+  background: linear-gradient(90deg, rgba(6,16,33,0.9), rgba(7,34,64,0.95));
+  border-bottom: 1px solid rgba(255,255,255,0.02);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 6px 26px rgba(2,6,23,0.6);
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+
+/* Logo block: add faux shield icon using pseudo element */
+.logo {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-weight:800;
+  font-size:20px;
+  color: var(--accent-cyan);
+  letter-spacing: 0.6px;
+}
+.logo::before {
+  content: "";
+  display:inline-block;
+  width:36px;
+  height:36px;
+  border-radius:8px;
+  background: linear-gradient(180deg, rgba(14,165,255,0.14), rgba(96,165,250,0.06));
+  box-shadow: 0 4px 12px rgba(14,165,255,0.08), inset 0 -6px 18px rgba(0,0,0,0.25);
+  position: relative;
+  border: 1px solid rgba(14,165,255,0.12);
+  /* small shield emblem */
+}
+.logo::after{
+  content: "SECURITY";
+  font-size:12px;
+  color: var(--muted);
+  margin-left:6px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+
+/* last-updated style */
+.status {
+  color: var(--muted);
+  font-size:13px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.status::before {
+  content: "";
+  width:10px;
+  height:10px;
+  background: radial-gradient(circle at 30% 30%, var(--neon-green), #0b8b60 55%, rgba(0,0,0,0));
+  border-radius:50%;
+  box-shadow: 0 0 12px rgba(16,185,129,0.25);
+}
+
+/* Container layout - slightly wider and centered */
+.container {
+  display:flex;
+  gap: var(--gutter);
+  padding: 22px;
+  max-width:1300px;
+  margin: 20px auto;
+}
+
+/* Columns */
+.left { flex: 0 0 55%; }
+.right { flex: 0 0 45%; }
+
+/* CARD - glass + neon border + soft shadow */
+.card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  padding: var(--card-padding);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-strong);
+  margin-bottom: 18px;
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(var(--blur));
+  transition: transform 220ms cubic-bezier(.2,.9,.3,1), box-shadow 220ms;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(2,6,23,0.7);
+}
+.card h3 {
+  margin:0 0 12px 0;
+  font-size:16px;
+  color: var(--soft-white);
+  letter-spacing:0.2px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+/* small card overflow */
+.small { max-height: 260px; overflow:auto; }
+
+/* ALERT LIST styles - enhanced with badges */
+#alerts-list { list-style:none; padding:0; margin:0; display:block; }
+#alerts-list li {
+  padding:14px 12px;
+  border-radius:10px;
+  margin-bottom:10px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.012), rgba(0,0,0,0.02));
+  border: 1px solid rgba(255,255,255,0.02);
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  box-shadow: var(--shadow-soft);
+}
+
+/* Alert icons (red/yellow/orange) via pseudo elements */
+#alerts-list li::before {
+  content: "";
+  flex: 0 0 12px;
+  height: 12px;
+  margin-top:6px;
+  border-radius:3px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.45);
+}
+#alerts-list li:nth-child(1)::before { background: linear-gradient(180deg, var(--neon-red), #c0242d); box-shadow: 0 0 18px rgba(239,68,68,0.25); } /* high */
+#alerts-list li:nth-child(2)::before { background: linear-gradient(180deg, var(--neon-yellow), #f59e0b); box-shadow: 0 0 18px rgba(245,158,11,0.18); } /* warning */
+#alerts-list li:nth-child(3)::before { background: linear-gradient(180deg, #fb923c, #f97316); box-shadow: 0 0 18px rgba(249,115,22,0.14); } /* drift */
+
+/* small meta text for alerts */
+#alerts-list li .meta {
+  display:block;
+  font-size:12px;
+  color:var(--muted);
+  margin-top:6px;
+}
+
+/* Recent events */
+#recent-events { list-style:none; padding:0; margin:0; color:var(--muted); font-size:13px; }
+#recent-events li { padding:8px 6px; border-bottom:1px dashed rgba(255,255,255,0.03); }
+
+/* Score card styling */
+/* Fix Threat Score gauge alignment */
+/* ===== FIX: Proper Gauge Alignment Without Breaking Style ===== */
+
+.score-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;   /* stack gauge + label vertically */
+}
+
+#gauge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+#scoreGauge {
+  width: 160px !important;   /* smaller to avoid overflow */
+  height: 120px !important;
+  display: block;
+}
+
+#scoreLabel {
+  font-size: 28px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* Tiles row - slightly elevated with neon top border */
+.tiles {
+  display:flex;
+  gap:12px;
+  margin-top:6px;
+}
+.tile {
+  flex:1;
+  background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
+  padding:12px;
+  border-radius:8px;
+  text-align:center;
+  font-weight:700;
+  color: var(--soft-white);
+  border: 1px solid rgba(255,255,255,0.02);
+  position:relative;
+  overflow:visible;
+  box-shadow: var(--shadow-soft);
+}
+.tile::after {
+  content: "";
+  position:absolute;
+  left:6px;
+  right:6px;
+  top:0;
+  height:4px;
+  border-radius:8px;
+  background: linear-gradient(90deg, rgba(14,165,255,0.18), rgba(124,58,237,0.10));
+  transform: translateY(-50%);
+  filter: blur(8px);
+  opacity:0.95;
+}
+
+/* tile status color hints - maintain original text structure */
+#tile-honeypot { color: var(--soft-white); }
+#tile-honeypot span { color: var(--neon-red); font-weight:900; margin-left:6px; }
+#tile-absence span { color: #f97316; font-weight:800; margin-left:6px; }
+#tile-drift span { color: #f97316; font-weight:800; margin-left:6px; }
+
+/* Recommendation panel */
+#recommendations {
+  font-size:14px;
+  color: var(--muted);
+  line-height:1.45;
+}
+.recommend-high { color: var(--neon-yellow); font-weight:800; }
+
+/* Footer-like recommendation card - use same .card structure used in HTML */
+
+/* Make charts and canvas look glossy */
+canvas { 
+  display:block;
+  margin: 0 auto;
+  background: transparent;
+}
+
+/* Responsive grid for lower panels - even if HTML doesn't contain separate elements, keep available */
+.bottom-grid {
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 14px;
+}
+
+/* Generic panel visuals for timeline/drift/indicators */
+.panel {
+  padding:14px;
+  border-radius:10px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.03);
+  box-shadow: var(--shadow-soft);
+}
+
+/* Add subtle animated glow for high threat */
+@keyframes pulseGlow {
+  0% { box-shadow: 0 0 0px rgba(239,68,68,0.0); transform: translateY(0); }
+  50% { box-shadow: 0 0 40px rgba(239,68,68,0.08); transform: translateY(-2px); }
+  100% { box-shadow: 0 0 0px rgba(239,68,68,0.0); transform: translateY(0); }
+}
+
+/* When threat is high (score >= 70) you can add a class to the card (JS can toggle if desired) */
+/* Example selector for a high-alert look (JS can add .high-alert to .score-card) */
+.score-card.high-alert {
+  border: 1px solid rgba(239,68,68,0.12);
+  animation: pulseGlow 2.2s ease-in-out infinite;
+}
+
+/* Media queries for smaller screens */
+@media (max-width: 980px) {
+  .container { flex-direction:column; padding:14px; max-width: 920px; }
+  .left, .right { flex: 1 1 auto; }
+  .tiles { flex-direction:column; }
+  .bottom-grid { grid-template-columns: 1fr; }
+}
+
+/* Tiny UI polish: small labels, column headers, subtle separators */
+.card h3 .label {
+  font-size:12px;
+  color:var(--muted);
+  background: rgba(255,255,255,0.02);
+  padding:4px 8px;
+  border-radius:6px;
+  margin-left:8px;
+}
+
+/* Hoverable recent events */
+#recent-events li:hover {
+  background: linear-gradient(90deg, rgba(14,165,255,0.02), rgba(255,255,255,0.01));
+  color: var(--soft-white);
+}
+
+/* ensure tile counts are visible regardless of content */
+.tile span {
+  display:inline-block;
+  min-width:48px;
+  text-align:center;
+}
+
+/* make list items text crisp */
+#alerts-list li, #recent-events li { font-smooth: always; -webkit-font-smoothing: antialiased; }
+
+/* final polish: slight vignette */
+body::after {
+  content: "";
+  position: fixed;
+  left: 0; right: 0; top: 0; bottom: 0;
+  pointer-events: none;
+  background: radial-gradient(60% 40% at 50% 10%, rgba(14,45,70,0.08), rgba(4,10,20,0.28));
+  mix-blend-mode: overlay;
+}
